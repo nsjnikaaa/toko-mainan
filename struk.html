@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struk Pembelian - Toko Mainan Anak Ceria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* General Styles (Copied from previous pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f7e8; /* Soft yellow background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top bar (Copied from previous pages) */
+        .top-bar {
+            background-color: #ffe5b4; /* Lighter yellow */
+            padding: 10px 0;
+            font-size: 0.95em;
+            border-bottom: 1px solid #f5c16c; /* Slightly darker yellow border */
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 10px; /* Space between items when wrapped */
+        }
+
+        .utility-nav {
+            display: flex; /* Arrange utility items (search, cart, account) in a row */
+            align-items: center;
+            gap: 15px; /* Space between utility items */
+        }
+
+        .utility-nav a {
+            color: #333;
+            transition: color 0.3s ease;
+            display: flex; /* Align icon and text */
+            align-items: center;
+        }
+
+        .utility-nav a:hover {
+            color: #FF6B6B; /* Pink hover color */
+        }
+
+        .utility-nav a i { /* Style for Font Awesome icons */
+            margin-right: 5px;
+            color: #FF6B6B; /* Icon color */
+        }
+
+        .utility-nav .cart-link i {
+             color: #4ECDC4; /* Teal color for cart icon */
+        }
+
+        .utility-nav .user-link i {
+             color: #FF8E53; /* Orange color for user icon */
+        }
+
+        /* Search Container (Copied from previous - Structure kept for consistency, JS disabled on this page) */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 0.9em;
+            flex-grow: 1; /* Allow input to take available space */
+        }
+
+        .search-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #FF6B6B; /* Search icon color */
+            padding: 5px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            color: #FF8E53; /* Darker pink hover */
+        }
+
+        .search-container input:disabled,
+        .search-container button:disabled {
+             opacity: 0.5;
+             cursor: not-allowed;
+        }
+
+
+        /* Header (Copied from previous pages) */
+        header {
+            background-color: #FF6B6B; /* Pink background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .main-header .container {
+            display: flex;
+            flex-direction: column; /* Stack logo and nav on small screens */
+            align-items: center;
+            gap: 20px; /* Space between logo and nav */
+        }
+
+        .main-header h1 a {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Main Navigation (Copied from previous pages) */
+        .main-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 20px;
+            background-color: #4ECDC4; /* Teal background */
+            border-radius: 8px;
+            /* margin-top: 15px; Removed, handled by flex gap */
+            flex-wrap: wrap;
+        }
+
+        .main-nav .nav-link {
+            padding: 8px 15px;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
+        }
+
+        .main-nav .nav-link:hover,
+        .main-nav .nav-link.active {
+            background-color: #FF8E53; /* Orange hover/active */
+            border-radius: 5px;
+             transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Struk Page Specific Styles */
+        .struk-page-content {
+             padding: 40px 0; /* Padding for the main content section */
+        }
+
+        .struk-container {
+            max-width: 700px; /* Slightly smaller max width */
+            margin: 0 auto; /* Center the container */
+            padding: 30px;
+            background-color: #fff; /* White background for the struk */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .struk-container h1 {
+            text-align: center;
+            color: #FF6B6B;
+            margin-bottom: 20px;
+            font-size: 2em; /* Slightly smaller title */
+            font-weight: 800;
+            border-bottom: 2px dashed #eee; /* Dashed separator */
+            padding-bottom: 15px;
+        }
+
+        .struk-info {
+            margin-bottom: 25px; /* Space below buyer info */
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .struk-info p {
+            margin-bottom: 10px;
+            font-size: 1em;
+            color: #555;
+        }
+
+        .struk-info p strong {
+            color: #333;
+            margin-right: 5px;
+        }
+
+        .produk-list h3 {
+            font-size: 1.5em;
+            color: #0077cc; /* Blue */
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .produk-list ul {
+            list-style: disc; /* Use discs for list items */
+            margin-left: 20px; /* Indent list */
+        }
+
+        .produk-list li {
+            margin-bottom: 8px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        .produk-list li strong { /* Style for product name */
+            color: #555;
+        }
+
+         .produk-list li span { /* Style for price/quantity */
+             font-weight: bold;
+             color: #4ECDC4; /* Teal */
+         }
+
+
+        .total-section {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 2px dashed #eee; /* Dashed separator */
+            text-align: right;
+        }
+
+        .total-section p {
+            font-size: 1.5em;
+            font-weight: 800;
+            color: #FF6B6B; /* Pink */
+        }
+
+        .print-button-container {
+             text-align: center; /* Center the print button */
+             margin-top: 30px;
+        }
+
+        .btn-print { /* Specific style for print button */
+             display: inline-block; /* Use inline-block to allow text-align on parent */
+             background-color: #4ECDC4; /* Teal */
+             color: white;
+             border: none;
+             padding: 12px 25px;
+             border-radius: 25px;
+             font-size: 1.1em;
+             font-weight: bold;
+             cursor: pointer;
+             transition: background-color 0.3s ease, transform 0.2s ease;
+             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+             text-decoration: none; /* Ensure it looks like a button */
+        }
+
+        .btn-print:hover {
+             background-color: #3bb5aa; /* Darker teal */
+             transform: translateY(-2px);
+             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+         .btn-print i {
+             margin-right: 8px;
+         }
+
+        /* Print Specific Styles */
+        @media print {
+            body {
+                background-color: #fff; /* White background for printing */
+            }
+            .top-bar, header, footer, .btn-print, #notification {
+                display: none; /* Hide non-receipt elements when printing */
+            }
+            .container {
+                padding: 0; /* Remove padding */
+            }
+            .struk-container {
+                box-shadow: none; /* Remove shadow */
+                border: none; /* Remove border */
+                border-radius: 0; /* Remove border radius */
+                max-width: 100%; /* Use full width */
+                padding: 0; /* Remove padding */
+                margin: 0;
+            }
+            .struk-container h1 {
+                border-bottom: 1px dashed #ccc; /* Lighter border for print */
+            }
+            .total-section {
+                 border-top: 1px dashed #ccc; /* Lighter border for print */
+            }
+        }
+
+
+        /* Footer (Copied from previous pages) */
+        footer {
+            background-color: #FF6B6B; /* Pink */
+            color: white;
+            padding: 40px 20px 20px; /* Increased padding */
+            margin-top: 40px; /* Add space above footer */
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px; /* Increased gap */
+        }
+
+        .footer-column {
+            flex: 1 1 250px; /* Allow columns to grow/shrink, minimum width 250px */
+            margin-bottom: 20px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 15px; /* Increased margin */
+            font-size: 1.4em; /* Larger heading */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px; /* Increased padding */
+            font-weight: 700;
+        }
+
+        .footer-column ul li {
+            margin: 10px 0; /* Increased margin */
+        }
+
+        .footer-column a {
+            color: white;
+            font-size: 1.1em; /* Slightly larger font */
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #4ECDC4; /* Teal hover */
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .footer-column p {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .footer-column p i { /* Style for footer icons */
+            margin-right: 8px;
+            color: #4ECDC4; /* Teal icon color */
+        }
+
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px; /* Increased margin */
+            font-size: 0.95em;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 20px; /* Increased padding */
+            color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+        }
+
+        .payment-methods img {
+            margin-right: 10px;
+            height: 35px; /* Slightly larger icons */
+            filter: grayscale(0%); /* Make icons colored */
+            opacity: 1; /* Full opacity */
+            transition: transform 0.3s ease;
+        }
+
+        .payment-methods img:hover {
+            transform: scale(1.1); /* Slight zoom on hover */
+        }
+
+
+        /* Notification (Copied from previous pages) */
+        #notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00B894; /* Green */
+            color: white;
+            padding: 15px 25px; /* Adjusted padding */
+            border-radius: 30px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+             min-width: 200px; /* Ensure minimum width */
+             text-align: center;
+        }
+
+        #notification.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments (Copied and adjusted for struk page) */
+        @media (max-width: 768px) {
+             .top-bar .container {
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 10px;
+             }
+
+             .utility-nav {
+                  width: 100%;
+                  justify-content: space-between;
+                  gap: 10px;
+                  flex-wrap: wrap;
+             }
+
+             .search-container {
+                  flex-grow: 1;
+                  order: 1;
+             }
+
+             .cart-link, .user-link {
+                  order: 2;
+                  flex-shrink: 0;
+             }
+
+             .main-header .container {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 15px;
+             }
+
+             .main-header h1 a {
+                 font-size: 2.2em;
+             }
+
+             .main-nav ul {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 8px;
+                 padding: 15px;
+             }
+
+             .struk-container {
+                 padding: 20px;
+                 max-width: 95%;
+             }
+
+             .struk-container h1 {
+                 font-size: 1.8em;
+                 padding-bottom: 10px;
+             }
+
+             .struk-info p {
+                 font-size: 0.95em;
+                 margin-bottom: 8px;
+             }
+
+             .produk-list h3 {
+                 font-size: 1.3em;
+             }
+
+             .produk-list li {
+                 font-size: 0.95em;
+             }
+
+             .total-section p {
+                 font-size: 1.3em;
+             }
+
+              .btn-print {
+                  padding: 10px 20px;
+                  font-size: 1em;
+              }
+              .btn-print i {
+                  margin-right: 5px;
+              }
+
+
+             .footer-grid {
+                 flex-direction: column;
+                 align-items: center;
+                 text-align: center;
+                 gap: 30px;
+             }
+
+             .footer-column {
+                 flex-basis: auto;
+                 width: 80%;
+                  max-width: 400px;
+             }
+
+             .footer-column h4 {
+                 text-align: center;
+             }
+
+             .footer-column p i {
+                  margin-right: 5px;
+             }
+
+              .payment-methods {
+                  justify-content: center;
+                  display: flex;
+              }
+        }
+
+        @media (max-width: 480px) {
+             .top-bar .container {
+                  align-items: center;
+             }
+             .utility-nav {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 8px;
+             }
+             .search-container, .cart-link, .user-link {
+                 width: 100%;
+                 justify-content: center;
+                  order: unset;
+             }
+
+             .search-container {
+                  padding: 8px 10px;
+              }
+              .search-container input {
+                  padding: 4px;
+              }
+
+             .main-header h1 a {
+                 font-size: 1.8em;
+             }
+
+              .main-nav ul {
+                  padding: 10px;
+                  gap: 5px;
+              }
+
+              .main-nav .nav-link {
+                  padding: 6px 12px;
+                  font-size: 0.95em;
+              }
+
+             .struk-container {
+                 padding: 15px;
+             }
+
+             .struk-container h1 {
+                 font-size: 1.6em;
+                 padding-bottom: 8px;
+             }
+
+              .struk-info p {
+                  font-size: 0.9em;
+                  margin-bottom: 6px;
+              }
+
+             .produk-list h3 {
+                 font-size: 1.2em;
+             }
+             .produk-list ul {
+                  margin-left: 15px;
+             }
+             .produk-list li {
+                  font-size: 0.9em;
+                  margin-bottom: 6px;
+             }
+
+             .total-section p {
+                 font-size: 1.2em;
+             }
+
+              .btn-print {
+                  padding: 8px 15px;
+                  font-size: 0.9em;
+              }
+              .btn-print i {
+                   margin-right: 4px;
+              }
+
+
+             .footer-column {
+                 width: 95%;
+             }
+
+              .footer-column h4 {
+                  font-size: 1.3em;
+              }
+
+              .footer-column a {
+                  font-size: 1em;
+              }
+              .footer-column p {
+                  font-size: 0.95em;
+              }
+
+              .footer-bottom {
+                  font-size: 0.85em;
+              }
+
+              .payment-methods img {
+                  height: 30px;
+              }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container">
+            <span>Selamat Datang di Toko Mainan Anak Ceria!</span>
+            <nav class="utility-nav">
+                 <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Cari mainan..." disabled> <button id="search-button" aria-label="Cari" disabled><i class="fas fa-search"></i></button> </div>
+                <a href="keranjang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                     Keranjang (<span id="cart-count">0</span>)
+                </a>
+                <a href="#" class="user-link">
+                    <i class="fas fa-user"></i>
+                    Akun
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <header class="main-header">
+         <div class="container">
+             <div class="logo">
+                 <h1><a href="index.html">Anak Ceria Toys</a></h1>
+             </div>
+             <nav class="main-nav">
+                 <ul>
+                     <li><a href="index.html" class="nav-link">Beranda</a></li>
+                     <li><a href="produk.html" class="nav-link">Produk</a></li>
+                     <li><a href="tentang.html" class="nav-link">Tentang</a></li>
+                     <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+                     <li><a href="form.html" class="nav-link active">Form Pembelian</a></li> </ul>
+             </nav>
+         </div>
+    </header>
+
+    <main>
+        <div class="container struk-page-content">
+            <div class="struk-container">
+                <h1>Struk Pembelian</h1>
+
+                <div id="struk-content">
+                    <p style="text-align: center; color: #ff4444; font-weight: bold;">Memuat struk...</p>
+                </div>
+
+            </div>
+
+            <div class="print-button-container">
+                 <button onclick="window.print()" class="btn-print"><i class="fas fa-print"></i> Cetak Struk</button>
+            </div>
+        </div>
+    </main>
+
+     <footer>
+         <div class="container footer-grid">
+             <div class="footer-column">
+                 <h4>Tentang Kami</h4>
+                 <p>Anak Ceria Toys adalah toko mainan yang berdedikasi untuk menyediakan mainan edukatif dan menyenangkan bagi anak-anak.</p>
+             </div>
+             <div class="footer-column">
+                 <h4>Tautan Cepat</h4>
+                 <ul>
+                     <li><a href="index.html">Beranda</a></li>
+                     <li><a href="produk.html">Produk</a></li>
+                     <li><a href="tentang.html">Tentang</a></li>
+                     <li><a href="kontak.html">Kontak</a></li>
+                     <li><a href="form.html">Form Pembelian</a></li>
+                 </ul>
+             </div>
+             <div class="footer-column">
+                 <h4>Hubungi Kami</h4>
+                 <p><i class="fas fa-envelope"></i> Email: info@anakceriatoys.com</p>
+                 <p><i class="fas fa-phone"></i> Telepon: (021) 123-4567</p>
+                  <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Bahagia No. 123, Kota Cerah</p>
+             </div>
+              <div class="footer-column">
+                  <h4>Metode Pembayaran</h4>
+                  <div class="payment-methods">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_202x_logo.png/800px-Mastercard_202x_logo.png" alt="Mastercard">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Visa_Inc._logo.svg/1280px-Visa_Inc._logo.svg.png" alt="Visa">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo-id.png/800px-Logo_ovo-id.png" alt="OVO">
+                  </div>
+              </div>
+         </div>
+         <div class="footer-bottom">
+             &copy; <span id="current-year"></span> Toko Mainan Anak Ceria. Semua Hak Dilindungi.
+         </div>
+     </footer>
+
+
+    <div id="notification"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartCountSpan = document.getElementById("cart-count");
+            const notificationDiv = document.getElementById("notification");
+            const strukContentDiv = document.getElementById("struk-content");
+            const currentYearSpan = document.getElementById("current-year");
+
+            // Set dynamic year in footer
+            currentYearSpan.textContent = new Date().getFullYear();
+
+            // --- Cart Functions (Consistent with other pages) ---
+            // Need these to update the cart count in the header
+            function getCart() {
+                try {
+                    const cart = localStorage.getItem("keranjang");
+                    return cart ? JSON.parse(cart) : [];
+                } catch (e) {
+                    console.error("Error loading cart from localStorage:", e);
+                    return [];
+                }
+            }
+
+            function updateCartCount() {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountSpan.textContent = totalItems;
+            }
+
+            // showNotification is not needed for standard page load, but kept for consistency if used later
+             function showNotification(message) {
+                notificationDiv.textContent = message;
+                notificationDiv.classList.add("show");
+                setTimeout(() => {
+                    notificationDiv.classList.remove("show");
+                    setTimeout(() => { notificationDiv.textContent = ''; }, 500);
+                }, 2000);
+            }
+
+            // --- Struk Rendering Logic ---
+            function renderStruk() {
+                const pembeli = JSON.parse(localStorage.getItem("dataPembeli"));
+                const keranjang = getCart(); // Use the consistent getCart function
+
+                if (!pembeli || keranjang.length === 0) {
+                    strukContentDiv.innerHTML = "<p style='text-align: center; color: #ff4444; font-weight: bold;'>Tidak ada data pembelian atau keranjang kosong.</p>";
+                    return;
+                }
+
+                let totalBelanja = 0;
+                let produkListHTML = '';
+
+                keranjang.forEach(item => {
+                    // Ensure price and quantity are numbers for calculation
+                    const itemPrice = parseFloat(item.price);
+                    const itemQuantity = parseInt(item.quantity);
+                    const itemSubtotal = itemPrice * itemQuantity;
+                    totalBelanja += itemSubtotal;
+
+                    produkListHTML += <li><strong>${item.name}</strong> (x${itemQuantity}) - <span>Rp ${itemSubtotal.toLocaleString('id-ID')}</span></li>;
+                });
+
+                const strukHTML = `
+                    <div class="struk-info">
+                        <p><strong>Nama:</strong> ${pembeli.nama}</p>
+                        <p><strong>Email:</strong> ${pembeli.email}</p>
+                        <p><strong>Telepon:</strong> ${pembeli.telepon}</p>
+                        <p><strong>Alamat:</strong> ${pembeli.alamat}</p>
+                        <p><strong>Metode Pembayaran:</strong> ${pembeli.pembayaran}</p>
+                         ${pembeli.catatan ? <p><strong>Catatan:</strong> ${pembeli.catatan}</p> : ''}
+                    </div>
+                    <div class="produk-list">
+                        <h3>Daftar Produk:</h3>
+                        <ul>
+                            ${produkListHTML}
+                        </ul>
+                    </div>
+                    <div class="total-section">
+                        <p>Total: Rp ${totalBelanja.toLocaleString('id-ID')}</p>
+                    </div>
+                `;
+
+                strukContentDiv.innerHTML = strukHTML;
+
+                // Optional: Clear cart and buyer data after showing struk
+                // localStorage.removeItem("keranjang");
+                // localStorage.removeItem("dataPembeli");
+                // updateCartCount(); // Update header count after clearing
+            }
+
+
+            // --- Initial Load ---
+            updateCartCount(); // Update header count on load
+            renderStruk(); // Render the struk details
+
+        });
+    </script>
+</body>
+</html>
