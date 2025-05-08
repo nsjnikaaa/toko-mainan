@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Pembelian - Toko Mainan Anak Ceria</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .form-container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+
+  header {
+    background-color: #FF6B6B;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.main-header .container {
+    display: flex;
+    flex-direction: column; /* Stack logo and nav on smaller screens */
+    align-items: center;
+}
+
+.main-header h1 a {
+    color: white;
+    font-size: 2.5em; /* Increased font size for prominence */
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Added text shadow */
+}
+
+/* Navigasi utama */
+.main-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 20px; /* Added horizontal padding */
+    background-color: #4ECDC4;
+    border-radius: 8px;
+    margin-top: 15px;
+    flex-wrap: wrap; /* Allow navigation items to wrap */
+}
+
+.main-nav .nav-link {
+    padding: 8px 15px; /* Adjusted padding */
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Added smooth transition */
+}
+
+.main-nav .nav-link:hover,
+.main-nav .nav-link.active {
+    background-color: #FF8E53;
+    border-radius: 5px;
+}
+
+  .form-container h1 {
+    text-align: center;
+    color: #FF6B6B;
+    margin-bottom: 30px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+
+  .radio-group,
+  .checkbox-group {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .checkbox-group label,
+  .radio-group label {
+    font-weight: normal;
+  }
+
+  .btn {
+    background-color: #FF6B6B;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .btn:hover {
+    background-color: #ff8e53;
+  }
+
+  canvas {
+    display: block;
+    margin: 20px auto;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background: #fff;
+  }
+</style>
+<body>
+  <header class="main-header">
+    <div class="container">
+       <div class="logo">
+           <h1><a href="index.html">Anak Ceria Toys</a></h1>
+       </div>
+       <nav class="main-nav">
+           <ul>
+               <li><a href="index.html" class="nav-link active">Beranda</a></li>
+               <li><a href="produk.html" class="nav-link">Produk</a></li>
+               <li><a href="tentang.html" class="nav-link">Tentang</a></li>
+               <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+               <li><a href="form.html" class="nav-link">Form Pembelian</a></li>
+           </ul>
+       </nav>
+    </div>
+</header>
+
+    <div class="container">
+        <h1>Form Pembelian</h1>
+        <form id="formPembelian">
+            <label>Nama Lengkap:</label><br>
+            <input type="text" id="nama" required><br><br>
+
+            <label>Alamat:</label><br>
+            <textarea id="alamat" required></textarea><br><br>
+
+            <label>Metode Pembayaran:</label><br>
+            <select id="pembayaran" required>
+                <option value="Transfer Bank">Transfer Bank</option>
+                <option value="COD">COD</option>
+                <option value="E-Wallet">E-Wallet</option>
+            </select><br><br>
+
+            <button type="submit" class="btn">Lanjutkan</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('formPembelian').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const data = {
+                nama: document.getElementById('nama').value,
+                alamat: document.getElementById('alamat').value,
+                pembayaran: document.getElementById('pembayaran').value
+            };
+
+            localStorage.setItem("dataPembeli", JSON.stringify(data));
+            window.location.href = "struk.html";
+        });
+    </script>
+</body>
+</html>
