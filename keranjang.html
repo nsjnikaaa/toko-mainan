@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja - Toko Mainan Anak Ceria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* General Styles (Copied from previous) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f7e8; /* Soft yellow background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top bar (Copied from previous) */
+        .top-bar {
+            background-color: #ffe5b4; /* Lighter yellow */
+            padding: 10px 0;
+            font-size: 0.95em;
+            border-bottom: 1px solid #f5c16c; /* Slightly darker yellow border */
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 10px; /* Space between items when wrapped */
+        }
+
+        .utility-nav {
+            display: flex; /* Arrange utility items (search, cart, account) in a row */
+            align-items: center;
+            gap: 15px; /* Space between utility items */
+        }
+
+        .utility-nav a {
+            color: #333;
+            transition: color 0.3s ease;
+            display: flex; /* Align icon and text */
+            align-items: center;
+        }
+
+        .utility-nav a:hover {
+            color: #FF6B6B; /* Pink hover color */
+        }
+
+        .utility-nav a i { /* Style for Font Awesome icons */
+            margin-right: 5px;
+            color: #FF6B6B; /* Icon color */
+        }
+
+        .utility-nav .cart-link i {
+             color: #4ECDC4; /* Teal color for cart icon */
+        }
+
+        .utility-nav .user-link i {
+             color: #FF8E53; /* Orange color for user icon */
+        }
+
+        /* Search Container (Copied from previous - Structure kept for consistency, JS not needed on this page) */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 0.9em;
+            flex-grow: 1; /* Allow input to take available space */
+        }
+
+        .search-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #FF6B6B; /* Search icon color */
+            padding: 5px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            color: #FF8E53; /* Darker pink hover */
+        }
+
+
+        /* Header (Copied from previous) */
+        header {
+            background-color: #FF6B6B; /* Pink background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .main-header .container {
+            display: flex;
+            flex-direction: column; /* Stack logo and nav on small screens */
+            align-items: center;
+            gap: 20px; /* Space between logo and nav */
+        }
+
+        .main-header h1 a {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Main Navigation (Copied from previous) */
+        .main-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 20px;
+            background-color: #4ECDC4; /* Teal background */
+            border-radius: 8px;
+            /* margin-top: 15px; Removed, handled by flex gap */
+            flex-wrap: wrap;
+        }
+
+        .main-nav .nav-link {
+            padding: 8px 15px;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
+        }
+
+        .main-nav .nav-link:hover,
+        .main-nav .nav-link.active {
+            background-color: #FF8E53; /* Orange hover/active */
+            border-radius: 5px;
+             transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Cart Page Specific Styles */
+        .keranjang-container {
+            max-width: 800px;
+            margin: 40px auto; /* Centered with margin */
+            padding: 30px; /* Increased padding */
+            background-color: #fffbe6;
+            border: 1px solid #FFD166; /* Softer border */
+            border-radius: 15px;
+             box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Added shadow */
+        }
+
+         .keranjang-container h1 {
+             text-align: center;
+             color: #FF6B6B;
+             margin-bottom: 30px; /* Increased margin */
+             font-size: 2.5em;
+             font-weight: 800;
+         }
+
+        #daftar-keranjang {
+             display: flex;
+             flex-direction: column;
+             gap: 20px; /* Space between cart items */
+        }
+
+        .produk-keranjang {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #eee; /* Lighter border */
+            padding-bottom: 15px; /* Increased padding */
+             padding-top: 5px; /* Small padding at top */
+             justify-content: space-between; /* Space out items */
+             flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+         .produk-keranjang:last-child {
+             border-bottom: none; /* No border for the last item */
+             padding-bottom: 0;
+         }
+
+        .produk-keranjang img {
+            width: 80px; /* Slightly smaller image */
+            height: 80px; /* Fixed height */
+            object-fit: cover; /* Crop image to fit */
+            border-radius: 10px;
+             border: 1px solid #FFD166; /* Add border to image */
+             flex-shrink: 0; /* Prevent image from shrinking */
+        }
+
+        .produk-info {
+            flex-grow: 1;
+             display: flex;
+             flex-direction: column;
+             gap: 5px;
+        }
+
+         .produk-info h3 {
+             font-size: 1.1em;
+             color: #333;
+             font-weight: 700;
+         }
+         .produk-info p {
+             font-size: 1em;
+             color: #555;
+         }
+
+        .produk-actions { /* Container for quantity, subtotal, remove */
+             display: flex;
+             align-items: center;
+             gap: 15px;
+             flex-wrap: wrap; /* Allow wrapping */
+             flex-shrink: 0;
+        }
+
+        .produk-actions input[type="number"] {
+             width: 60px;
+             padding: 5px;
+             border: 1px solid #ccc;
+             border-radius: 5px;
+             text-align: center;
+             font-size: 1em;
+             -moz-appearance: textfield; /* Hide arrows in Firefox */
+             appearance: textfield; /* Hide arrows in Chrome/Safari */
+             outline: none;
+              transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .produk-actions input[type="number"]::-webkit-outer-spin-button,
+        .produk-actions input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .produk-actions input[type="number"]:focus {
+             border-color: #4ECDC4;
+             box-shadow: 0 0 5px rgba(78, 205, 196, 0.5);
+        }
+
+
+         .item-subtotal {
+             font-weight: bold;
+             color: #4ECDC4; /* Teal color */
+             font-size: 1.1em;
+             min-width: 100px; /* Ensure space for price */
+             text-align: right;
+         }
+
+        .btn-hapus {
+             background-color: #ff4444; /* Red */
+             border: none;
+             padding: 8px 12px; /* Adjusted padding */
+             color: white;
+             border-radius: 5px; /* Slightly less rounded */
+             cursor: pointer;
+             font-size: 0.9em;
+             font-weight: 700;
+             transition: background-color 0.3s ease, transform 0.2s ease;
+             display: flex;
+             align-items: center;
+             gap: 5px;
+        }
+
+        .btn-hapus:hover {
+             background-color: #cc0000; /* Darker red */
+             transform: translateY(-2px); /* Slight lift */
+        }
+         .btn-hapus i {
+             font-size: 0.8em;
+         }
+
+
+        .total-harga {
+            font-weight: 800; /* Extra bold */
+            text-align: right;
+            margin-top: 30px; /* Increased margin */
+            font-size: 1.5em; /* Larger font */
+            color: #FF6B6B; /* Pink */
+            border-top: 1px solid #eee;
+             padding-top: 15px;
+        }
+
+        .checkout-button-container { /* Container for checkout button */
+             text-align: right; /* Align button to the right */
+             margin-top: 20px;
+        }
+
+        .btn-beli { /* Renamed class for clarity if using the main .btn styles */
+             /* Keeping btn-beli for compatibility with current JS */
+             display: inline-block; /* Use inline-block to allow text-align on parent */
+             padding: 12px 25px; /* Adjusted padding */
+             background-color: #4ECDC4; /* Teal */
+             color: white;
+             border: none;
+             border-radius: 25px; /* More rounded */
+             font-weight: bold;
+             cursor: pointer;
+             font-size: 1.1em;
+             transition: background-color 0.3s ease, transform 0.2s ease;
+             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-beli:hover {
+             background-color: #3bb5aa; /* Darker teal */
+             transform: translateY(-2px);
+             box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+         .btn-beli i {
+             margin-right: 5px;
+         }
+
+        /* Footer (Copied from previous) */
+        footer {
+            background-color: #FF6B6B; /* Pink */
+            color: white;
+            padding: 40px 20px 20px; /* Increased padding */
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px; /* Increased gap */
+        }
+
+        .footer-column {
+            flex: 1 1 250px; /* Allow columns to grow/shrink, minimum width 250px */
+            margin-bottom: 20px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 15px; /* Increased margin */
+            font-size: 1.4em; /* Larger heading */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px; /* Increased padding */
+            font-weight: 700;
+        }
+
+        .footer-column ul li {
+            margin: 10px 0; /* Increased margin */
+        }
+
+        .footer-column a {
+            color: white;
+            font-size: 1.1em; /* Slightly larger font */
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #4ECDC4; /* Teal hover */
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .footer-column p {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .footer-column p i { /* Style for footer icons */
+            margin-right: 8px;
+            color: #4ECDC4; /* Teal icon color */
+        }
+
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px; /* Increased margin */
+            font-size: 0.95em;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 20px; /* Increased padding */
+            color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+        }
+
+        .payment-methods img {
+            margin-right: 10px;
+            height: 35px; /* Slightly larger icons */
+            filter: grayscale(0%); /* Make icons colored */
+            opacity: 1; /* Full opacity */
+            transition: transform 0.3s ease;
+        }
+
+        .payment-methods img:hover {
+            transform: scale(1.1); /* Slight zoom on hover */
+        }
+
+
+        /* Notification (Copied from previous) */
+        #notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00B894; /* Green */
+            color: white;
+            padding: 15px 25px; /* Adjusted padding */
+            border-radius: 30px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+             min-width: 200px; /* Ensure minimum width */
+             text-align: center;
+        }
+
+        #notification.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Responsive Adjustments (Copied and adjusted for cart page) */
+        @media (max-width: 768px) {
+             .top-bar .container {
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 10px;
+             }
+
+             .utility-nav {
+                  width: 100%;
+                  justify-content: space-between;
+                  gap: 10px;
+                  flex-wrap: wrap;
+             }
+
+             .search-container {
+                  flex-grow: 1;
+                  order: 1;
+             }
+
+             .cart-link, .user-link {
+                  order: 2;
+                  flex-shrink: 0;
+             }
+
+             .main-header .container {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 15px;
+             }
+
+             .main-header h1 a {
+                 font-size: 2.2em;
+             }
+
+             .main-nav ul {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 8px;
+                 padding: 15px;
+             }
+
+             .keranjang-container {
+                 margin: 20px auto; /* Smaller margin */
+                 padding: 20px;
+                 max-width: 95%; /* Allow container to be wider on smaller screens */
+             }
+
+             .keranjang-container h1 {
+                 font-size: 2em;
+             }
+
+             .produk-keranjang {
+                 flex-direction: column; /* Stack items vertically */
+                 align-items: flex-start; /* Align items to the start */
+                 gap: 10px;
+             }
+
+             .produk-keranjang img {
+                 width: 100px; /* Slightly larger image when stacked */
+                 height: 100px;
+             }
+
+             .produk-info {
+                 width: 100%; /* Info takes full width */
+             }
+
+             .produk-actions {
+                 width: 100%; /* Actions take full width */
+                 justify-content: space-between; /* Distribute action items */
+             }
+
+              .item-subtotal {
+                  min-width: auto; /* Remove min-width */
+              }
+
+
+             .footer-grid {
+                 flex-direction: column;
+                 align-items: center;
+                 text-align: center;
+                 gap: 30px;
+             }
+
+             .footer-column {
+                 flex-basis: auto;
+                 width: 80%;
+                  max-width: 400px;
+             }
+
+             .footer-column h4 {
+                 text-align: center;
+             }
+
+             .footer-column p i {
+                  margin-right: 5px;
+             }
+
+              .payment-methods {
+                  justify-content: center;
+                  display: flex;
+              }
+
+              .checkout-button-container {
+                 text-align: center; /* Center button when stacked */
+              }
+         }
+
+        @media (max-width: 480px) {
+             .top-bar .container {
+                  align-items: center;
+             }
+             .utility-nav {
+                 flex-direction: column;
+                 align-items: center;
+                 gap: 8px;
+             }
+             .search-container, .cart-link, .user-link {
+                 width: 100%;
+                 justify-content: center;
+                  order: unset;
+             }
+
+             .search-container {
+                  padding: 8px 10px;
+              }
+              .search-container input {
+                  padding: 4px;
+              }
+
+             .main-header h1 a {
+                 font-size: 1.8em;
+             }
+
+              .main-nav ul {
+                  padding: 10px;
+                  gap: 5px;
+              }
+
+              .main-nav .nav-link {
+                  padding: 6px 12px;
+                  font-size: 0.95em;
+              }
+
+             .keranjang-container {
+                 padding: 15px;
+             }
+
+             .keranjang-container h1 {
+                 font-size: 1.8em;
+                 margin-bottom: 20px;
+             }
+
+             .produk-keranjang {
+                 gap: 10px;
+                 padding-bottom: 10px;
+             }
+
+             .produk-keranjang img {
+                  width: 80px;
+                  height: 80px;
+             }
+
+             .produk-info h3 {
+                  font-size: 1em;
+             }
+
+              .produk-info p {
+                   font-size: 0.9em;
+              }
+
+             .produk-actions {
+                 gap: 10px;
+             }
+
+             .produk-actions input[type="number"] {
+                  width: 50px;
+                  padding: 3px;
+                  font-size: 0.9em;
+             }
+
+             .item-subtotal {
+                 font-size: 1em;
+             }
+
+              .btn-hapus {
+                  padding: 6px 10px;
+                  font-size: 0.8em;
+              }
+              .btn-hapus i {
+                  font-size: 0.7em;
+              }
+
+             .total-harga {
+                 font-size: 1.3em;
+                 margin-top: 20px;
+                 padding-top: 10px;
+             }
+
+              .btn-beli {
+                  padding: 10px 20px;
+                  font-size: 1em;
+              }
+
+             .footer-column {
+                 width: 95%;
+             }
+
+              .footer-column h4 {
+                  font-size: 1.3em;
+              }
+
+              .footer-column a {
+                  font-size: 1em;
+              }
+              .footer-column p {
+                  font-size: 0.95em;
+              }
+
+              .footer-bottom {
+                  font-size: 0.85em;
+              }
+
+              .payment-methods img {
+                  height: 30px;
+              }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container">
+            <span>Selamat Datang di Toko Mainan Anak Ceria!</span>
+            <nav class="utility-nav">
+                 <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Cari mainan..." disabled> <button id="search-button" aria-label="Cari" disabled><i class="fas fa-search"></i></button> </div>
+                <a href="keranjang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                     Keranjang (<span id="cart-count">0</span>)
+                </a>
+                <a href="#" class="user-link">
+                    <i class="fas fa-user"></i>
+                    Akun
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <header class="main-header">
+         <div class="container">
+             <div class="logo">
+                 <h1><a href="index.html">Anak Ceria Toys</a></h1>
+             </div>
+             <nav class="main-nav">
+                 <ul>
+                     <li><a href="index.html" class="nav-link">Beranda</a></li>
+                     <li><a href="produk.html" class="nav-link">Produk</a></li>
+                     <li><a href="tentang.html" class="nav-link">Tentang</a></li>
+                     <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+                     <li><a href="form.html" class="nav-link">Form Pembelian</a></li>
+                 </ul>
+             </nav>
+         </div>
+    </header>
+
+    <main>
+        <div class="container keranjang-container">
+            <h1>Keranjang Belanja</h1>
+            <div id="daftar-keranjang">
+                </div>
+            <div class="total-harga" id="total-harga">
+                </div>
+            <div class="checkout-button-container">
+                <button class="btn-beli" onclick="window.location.href='form.html'"><i class="fas fa-cash-register"></i> Lanjutkan ke Pembelian</button>
+            </div>
+        </div>
+    </main>
+
+     <footer>
+         <div class="container footer-grid">
+             <div class="footer-column">
+                 <h4>Tentang Kami</h4>
+                 <p>Anak Ceria Toys adalah toko mainan yang berdedikasi untuk menyediakan mainan edukatif dan menyenangkan bagi anak-anak.</p>
+             </div>
+             <div class="footer-column">
+                 <h4>Tautan Cepat</h4>
+                 <ul>
+                     <li><a href="index.html">Beranda</a></li>
+                     <li><a href="produk.html">Produk</a></li>
+                     <li><a href="tentang.html">Tentang</a></li>
+                     <li><a href="kontak.html">Kontak</a></li>
+                     <li><a href="form.html">Form Pembelian</a></li>
+                 </ul>
+             </div>
+             <div class="footer-column">
+                 <h4>Hubungi Kami</h4>
+                 <p><i class="fas fa-envelope"></i> Email: info@anakceriatoys.com</p>
+                 <p><i class="fas fa-phone"></i> Telepon: (021) 123-4567</p>
+                  <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Bahagia No. 123, Kota Cerah</p>
+             </div>
+              <div class="footer-column">
+                  <h4>Metode Pembayaran</h4>
+                  <div class="payment-methods">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_202x_logo.png/800px-Mastercard_202x_logo.png" alt="Mastercard">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Visa_Inc._logo.svg/1280px-Visa_Inc._logo.svg.png" alt="Visa">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo-id.png/800px-Logo_ovo-id.png" alt="OVO">
+                  </div>
+              </div>
+         </div>
+         <div class="footer-bottom">
+             &copy; <span id="current-year"></span> Toko Mainan Anak Ceria. Semua Hak Dilindungi.
+         </div>
+     </footer>
+
+
+    <div id="notification"></div>
+
+    <script>
+       document.addEventListener("DOMContentLoaded", () => {
+    const cartCountSpan = document.getElementById("cart-count");
+    const notificationDiv = document.getElementById("notification");
+    const daftarKeranjangContainer = document.getElementById("daftar-keranjang");
+    const totalHargaElem = document.getElementById("total-harga");
+    const currentYearSpan = document.getElementById("current-year");
+    const checkoutButtonContainer = document.querySelector('.checkout-button-container');
+
+
+    currentYearSpan.textContent = new Date().getFullYear();
+
+    function getCart() {
+        try {
+            const cart = localStorage.getItem("keranjang");
+            return cart ? JSON.parse(cart) : [];
+        } catch (e) {
+            console.error("Error loading cart from localStorage:", e);
+            return [];
+        }
+    }
+
+    function saveCart(cart) {
+        try {
+            localStorage.setItem("keranjang", JSON.stringify(cart));
+        } catch (e) {
+            console.error("Error saving cart to localStorage:", e);
+        }
+    }
+
+    function updateCartCount() {
+        const cart = getCart();
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountSpan.textContent = totalItems;
+    }
+
+    function showNotification(message) {
+        notificationDiv.textContent = message;
+        notificationDiv.classList.add("show");
+        setTimeout(() => {
+            notificationDiv.classList.remove("show");
+            setTimeout(() => { notificationDiv.textContent = ''; }, 500);
+        }, 2000);
+    }
+
+    function renderCart() {
+        const keranjang = getCart();
+        daftarKeranjangContainer.innerHTML = "";
+
+        if (keranjang.length === 0) {
+            daftarKeranjangContainer.innerHTML = "<p style='text-align: center; color: #555;'>Keranjang masih kosong.</p>";
+            recalculateAndUpdateTotal(); // Ini akan mengosongkan total dan menyembunyikan tombol
+            return;
+        }
+
+        let totalBelanja = 0;
+
+        keranjang.forEach(item => {
+            const itemPrice = parseFloat(item.price);
+            const itemQuantity = parseInt(item.quantity);
+            const itemSubtotal = itemPrice * itemQuantity;
+            totalBelanja += itemSubtotal;
+
+            const itemElement = document.createElement("div");
+            itemElement.className = "produk-keranjang";
+            // Menambahkan data-price ke input untuk kemudahan akses di handleQuantityChange
+            itemElement.innerHTML = `
+                <img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display='none'">
+                <div class="produk-info">
+                    <h3>${item.name}</h3>
+                    <p>Harga: Rp ${itemPrice.toLocaleString("id-ID")}</p>
+                </div>
+                <div class="produk-actions">
+                    <label for="qty-${item.id}">Jumlah:</label>
+                    <input type="number" id="qty-${item.id}" class="item-quantity" value="${itemQuantity}" min="1" data-id="${item.id}" data-price="${itemPrice}">
+                    <span class="item-subtotal">Rp ${itemSubtotal.toLocaleString("id-ID")}</span>
+                    <button class="btn-hapus" data-id="${item.id}"><i class="fas fa-trash-alt"></i> Hapus</button>
+                </div>
+            `;
+            daftarKeranjangContainer.appendChild(itemElement);
+        });
+        recalculateAndUpdateTotal();
+    }
+
+    function recalculateAndUpdateTotal() {
+        const cart = getCart();
+        let totalBelanja = 0;
+        cart.forEach(item => {
+            totalBelanja += parseFloat(item.price) * parseInt(item.quantity);
+        });
+
+        if (cart.length > 0) {
+            totalHargaElem.textContent = `Total Belanja: Rp ${totalBelanja.toLocaleString("id-ID")}`;
+            if (checkoutButtonContainer) checkoutButtonContainer.style.display = 'block';
+        } else {
+            totalHargaElem.textContent = "";
+            if (checkoutButtonContainer) checkoutButtonContainer.style.display = 'none';
+        }
+    }
+
+
+    function handleQuantityChange(event) {
+        const input = event.target;
+        const itemId = input.dataset.id;
+        let newQuantity = parseInt(input.value); // Biarkan bisa diubah
+        const itemPrice = parseFloat(input.dataset.price); // Ambil harga dari data-attribute
+
+        if (isNaN(newQuantity) || newQuantity <= 0) {
+            newQuantity = 1; // Koreksi nilai
+            input.value = newQuantity; // Update nilai input di UI
+            showNotification("Jumlah minimal adalah 1.");
+            // Tidak perlu dispatch event, biarkan fungsi melanjutkan dengan nilai yang dikoreksi
+        }
+
+        let cart = getCart();
+        const itemIndex = cart.findIndex(item => item.id === itemId);
+
+        if (itemIndex > -1) {
+            cart[itemIndex].quantity = newQuantity;
+            saveCart(cart);
+
+            // Update subtotal untuk item yang diubah secara langsung
+            const produkActionsDiv = input.closest('.produk-actions');
+            if (produkActionsDiv) {
+                const subtotalSpan = produkActionsDiv.querySelector('.item-subtotal');
+                if (subtotalSpan) {
+                    const newSubtotal = itemPrice * newQuantity;
+                    subtotalSpan.textContent = `Rp ${newSubtotal.toLocaleString("id-ID")}`;
+                }
+            }
+            recalculateAndUpdateTotal();
+            updateCartCount();
+            showNotification(`Jumlah "${cart[itemIndex].name}" diperbarui menjadi ${newQuantity}.`); // Perbaikan template literal
+        }
+    }
+
+    function handleRemoveItem(event) {
+        const button = event.target.closest('.btn-hapus');
+        if (!button) return;
+
+        const itemId = button.dataset.id;
+        let cart = getCart();
+        const itemIndex = cart.findIndex(item => item.id === itemId);
+        const itemName = itemIndex > -1 ? cart[itemIndex].name : "Produk";
+        const initialLength = cart.length;
+
+        cart = cart.filter(item => item.id !== itemId);
+
+        if (cart.length < initialLength) {
+            saveCart(cart);
+            button.closest('.produk-keranjang').remove(); // Hapus elemen dari DOM
+            updateCartCount();
+            recalculateAndUpdateTotal();
+            showNotification(`"${itemName}" berhasil dihapus dari keranjang.`);
+
+            if (cart.length === 0) {
+                renderCart(); // Panggil renderCart lagi untuk menampilkan pesan "Keranjang kosong"
+            }
+        } else {
+            showNotification("Gagal menghapus produk.");
+        }
+    }
+
+    // Event Delegation
+    daftarKeranjangContainer.addEventListener('change', (event) => {
+        if (event.target.classList.contains('item-quantity')) {
+            handleQuantityChange(event);
+        }
+    });
+
+    daftarKeranjangContainer.addEventListener('click', (event) => {
+        if (event.target.closest('.btn-hapus')) {
+            handleRemoveItem(event);
+        }
+    });
+
+    updateCartCount();
+    renderCart();
+});
+          </script>
+</body>
+</html>
