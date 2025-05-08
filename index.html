@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Mainan Anak Ceria - Beranda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f9f7e8; /* Soft yellow background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Top bar */
+        .top-bar {
+            background-color: #ffe5b4; /* Lighter yellow */
+            padding: 10px 0;
+            font-size: 0.95em;
+            border-bottom: 1px solid #f5c16c; /* Slightly darker yellow border */
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 10px; /* Space between items when wrapped */
+        }
+
+        .utility-nav {
+            display: flex; /* Arrange utility items (search, cart, account) in a row */
+            align-items: center;
+            gap: 15px; /* Space between utility items */
+        }
+
+        .utility-nav a {
+            color: #333;
+            transition: color 0.3s ease;
+            display: flex; /* Align icon and text */
+            align-items: center;
+        }
+
+        .utility-nav a:hover {
+            color: #FF6B6B; /* Pink hover color */
+        }
+
+        .utility-nav a i { /* Style for Font Awesome icons */
+            margin-right: 5px;
+            color: #FF6B6B; /* Icon color */
+        }
+
+        .utility-nav .cart-link i {
+             color: #4ECDC4; /* Teal color for cart icon */
+        }
+
+        .utility-nav .user-link i {
+             color: #FF8E53; /* Orange color for user icon */
+        }
+
+        /* Search Container */
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 5px;
+            font-size: 0.9em;
+            flex-grow: 1; /* Allow input to take available space */
+        }
+
+        .search-container button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #FF6B6B; /* Search icon color */
+            padding: 5px;
+            font-size: 1em;
+            transition: color 0.3s ease;
+        }
+
+        .search-container button:hover {
+            color: #FF8E53; /* Darker pink hover */
+        }
+
+
+        /* Header */
+        header {
+            background-color: #FF6B6B; /* Pink background */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .main-header .container {
+            display: flex;
+            flex-direction: column; /* Stack logo and nav on small screens */
+            align-items: center;
+            gap: 20px; /* Space between logo and nav */
+        }
+
+        .main-header h1 a {
+            color: white;
+            font-size: 2.5em;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Main Navigation */
+        .main-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 20px;
+            background-color: #4ECDC4; /* Teal background */
+            border-radius: 8px;
+            /* margin-top: 15px; Removed, handled by flex gap */
+            flex-wrap: wrap;
+        }
+
+        .main-nav .nav-link {
+            padding: 8px 15px;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
+        }
+
+        .main-nav .nav-link:hover,
+        .main-nav .nav-link.active {
+            background-color: #FF8E53; /* Orange hover/active */
+            border-radius: 5px;
+             transform: translateY(-2px); /* Slight lift on hover */
+        }
+
+        /* Hero Banner */
+        .hero-banner-section {
+            background: linear-gradient(to right, #aedcff, #74c0fc); /* Blue gradient */
+            text-align: center;
+            padding: 80px 20px;
+            color: #1c3a5f; /* Dark blue text */
+            position: relative; /* Needed for potential background image or overlay */
+            overflow: hidden; /* Hide overflow from any potential animations */
+        }
+
+        .hero-banner-section h2 { /* Changed to H2 */
+            color: white;
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3); /* Darker shadow */
+        }
+
+        .hero-banner-section p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .hero-banner-section .btn {
+            background-color: #ff6347; /* Tomato color */
+            padding: 15px 30px;
+            border-radius: 30px;
+            color: white;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Added transform */
+            font-size: 1.1em;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Add shadow */
+        }
+
+        .hero-banner-section .btn:hover {
+            background-color: #ff8e53; /* Orange hover */
+             transform: translateY(-2px); /* Slight lift */
+             box-shadow: 0 6px 12px rgba(0,0,0,0.3); /* Increased shadow */
+        }
+
+        /* Product Section */
+        .produk {
+            padding: 40px 0;
+            background-color: #f9f7e8; /* Ensure background color */
+        }
+
+        .produk h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #FF6B6B; /* Pink */
+            font-size: 2.5em; /* Larger heading */
+            font-weight: 800;
+        }
+
+        .produk-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px; /* Increased gap for better spacing */
+            justify-content: center;
+        }
+
+        .produk-item {
+            background: #fffbe6; /* Very light yellow */
+            border: 1px solid #FFD166; /* Slightly lighter yellow border */
+            border-radius: 15px;
+            padding: 20px; /* Increased padding */
+            width: 300px; /* Fixed width for consistency, will adjust in media queries */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Softer shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added shadow transition */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+             overflow: hidden; /* Ensure badges don't overflow corners if they are large */
+        }
+
+        .produk-item:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2); /* More prominent shadow on hover */
+        }
+
+        .product-badges { /* New container for badges */
+             position: absolute;
+             top: 10px; /* Adjust position from the top */
+             left: 10px; /* Adjust position from the left */
+             right: 10px; /* Adjust position from the right */
+             display: flex; /* Allow multiple badges */
+             justify-content: space-between; /* Space out badges */
+             gap: 5px; /* Space between badges */
+             z-index: 1; /* Ensure badges are above image */
+             pointer-events: none; /* Allow clicks to pass through badges */
+        }
+
+        .product-badge {
+            display: inline-block;
+            color: white;
+            font-size: 0.8em; /* Slightly larger font than original */
+            padding: 4px 10px; /* Adjusted padding */
+            border-radius: 20px; /* More rounded corners */
+            font-weight: bold;
+             /* Removed absolute positioning here, now controlled by .product-badges */
+             /* Removed individual left/right styles */
+        }
+
+        .product-badge.hot {
+            background-color: #FF4500; /* OrangeRed for Hot */
+            /* No need for position/left/right here */
+        }
+
+        .product-badge.new {
+            background-color: #00B894; /* Green for New */
+             /* No need for position/left/right here */
+        }
+
+         .product-badge.category {
+             background-color: #4ECDC4; /* Teal for category */
+             /* No need for position/left/right here */
+         }
+
+
+        .product-image {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px; /* Increased margin */
+            min-height: 180px; /* Slightly increased min height */
+            overflow: hidden; /* Hide parts of image that exceed boundaries */
+            border-radius: 10px; /* Match item border radius */
+        }
+
+        .product-image img {
+            max-width: 100%;
+            max-height: 200px; /* Limit max height */
+            height: auto;
+            border-radius: 8px;
+            object-fit: contain; /* Ensure image is contained without being cropped */
+            transition: transform 0.3s ease; /* Add transition for potential hover effect */
+        }
+
+        .produk-item:hover .product-image img {
+            transform: scale(1.05); /* Slightly zoom image on product hover */
+        }
+
+
+        .product-info {
+            margin-top: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left; /* Align text to the left */
+        }
+
+        .product-info h3 {
+            font-size: 1.2em; /* Slightly larger font */
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 700; /* Bold title */
+        }
+
+        .product-info p {
+            font-size: 0.95em; /* Slightly larger description */
+            color: #555;
+            margin-bottom: 10px;
+             flex-grow: 1; /* Allow description to take up space */
+             min-height: 40px; /* Ensure minimum space for description */
+        }
+
+        .harga {
+            display: block;
+            margin: 10px 0;
+            font-weight: 800; /* Extra bold */
+            color: #FF6B6B; /* Pink */
+            font-size: 1.4em; /* Larger price */
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between; /* Space out buttons */
+            gap: 10px;
+            margin-top: 15px; /* Increased margin */
+            flex-shrink: 0;
+        }
+
+        .btn {
+            padding: 10px 15px; /* Adjusted padding */
+            border-radius: 25px; /* More rounded */
+            background-color: #FF6B6B; /* Pink */
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex; /* Arrange icon and text */
+            align-items: center;
+            justify-content: center; /* Center content in button */
+            gap: 5px; /* Space between icon and text */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Add shadow */
+        }
+
+        .btn:hover {
+            background-color: #FF8E53; /* Orange hover */
+             transform: translateY(-2px); /* Slight lift */
+             box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Increased shadow */
+        }
+
+        .btn.detail-btn {
+            background-color: #4ECDC4; /* Teal */
+        }
+
+        .btn.detail-btn:hover {
+             background-color: #45b7af; /* Darker teal */
+        }
+
+        .btn i { /* Style for Font Awesome icons within buttons */
+            font-size: 0.9em; /* Slightly smaller icon */
+        }
+
+
+        /* Features Section */
+        .features-section {
+            padding: 60px 0; /* Increased padding */
+            background-color: #e0f7fa; /* Light blue */
+            text-align: center;
+        }
+
+        .features-section h3 {
+            font-size: 2.2em; /* Larger heading */
+            margin-bottom: 20px; /* Increased margin */
+            color: #0077cc; /* Blue */
+            font-weight: 800;
+        }
+
+        .features-section p {
+            font-size: 1.2em; /* Larger text */
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
+            line-height: 1.8; /* Increased line height */
+        }
+
+        /* Live Chat Styles */
+        #live-chat {
+            border: 2px solid #4ECDC4; /* Teal border */
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #f1fefe; /* Very light teal background */
+            margin-top: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        #live-chat h2 {
+            margin-bottom: 15px; /* Increased margin */
+            color: #0077cc; /* Blue */
+            font-size: 2em;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        #chat-box {
+            height: 250px; /* Slightly increased height */
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #fff;
+            margin-bottom: 15px; /* Increased margin */
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Space between messages */
+        }
+
+        .chat-message { /* Styling for individual messages */
+             margin-bottom: 0 !important; /* Override default p margin */
+             padding: 8px 12px; /* Adjusted padding */
+             border-radius: 15px; /* More rounded message bubbles */
+             max-width: 80%;
+             word-wrap: break-word;
+             font-size: 0.95em;
+             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .chat-message.received {
+             background-color: #e9e9eb; /* Light grey bubble */
+             align-self: flex-start;
+             border-bottom-left-radius: 2px; /* Point the bubble */
+        }
+
+        .chat-message.sent {
+             background-color: #dcf8c6; /* Light green bubble */
+             align-self: flex-end;
+             border-bottom-right-radius: 2px; /* Point the bubble */
+        }
+
+
+        .chat-input-area { /* New container for input and button */
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #chat-input {
+            flex-grow: 1; /* Allow input to fill space */
+            padding: 10px;
+            border-radius: 20px; /* More rounded input */
+            border: 1px solid #ccc;
+            font-size: 1em;
+             outline: none; /* Remove outline on focus */
+             transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #chat-input:focus {
+            border-color: #4ECDC4; /* Highlight border on focus */
+            box-shadow: 0 0 5px rgba(78, 205, 196, 0.5); /* Add subtle shadow on focus */
+        }
+
+
+        #live-chat .btn {
+             padding: 10px 15px; /* Adjusted padding */
+             font-size: 1em;
+             flex-shrink: 0; /* Prevent button from shrinking */
+             border-radius: 20px;
+             background-color: #4ECDC4; /* Teal */
+        }
+
+        #live-chat .btn:hover {
+             background-color: #45b7af; /* Darker teal */
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: #FF6B6B; /* Pink */
+            color: white;
+            padding: 40px 20px 20px; /* Increased padding */
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px; /* Increased gap */
+        }
+
+        .footer-column {
+            flex: 1 1 250px; /* Allow columns to grow/shrink, minimum width 250px */
+            margin-bottom: 20px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 15px; /* Increased margin */
+            font-size: 1.4em; /* Larger heading */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px; /* Increased padding */
+            font-weight: 700;
+        }
+
+        .footer-column ul li {
+            margin: 10px 0; /* Increased margin */
+        }
+
+        .footer-column a {
+            color: white;
+            font-size: 1.1em; /* Slightly larger font */
+            transition: color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            color: #4ECDC4; /* Teal hover */
+            text-decoration: underline; /* Add underline on hover */
+        }
+
+        .footer-column p {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .footer-column p i { /* Style for footer icons */
+            margin-right: 8px;
+            color: #4ECDC4; /* Teal icon color */
+        }
+
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px; /* Increased margin */
+            font-size: 0.95em;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 20px; /* Increased padding */
+            color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+        }
+
+        .payment-methods img {
+            margin-right: 10px;
+            height: 35px; /* Slightly larger icons */
+            filter: grayscale(0%); /* Make icons colored */
+            opacity: 1; /* Full opacity */
+            transition: transform 0.3s ease;
+        }
+
+        .payment-methods img:hover {
+            transform: scale(1.1); /* Slight zoom on hover */
+        }
+
+
+        /* Notification */
+        #notification {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00B894; /* Green */
+            color: white;
+            padding: 15px 25px; /* Adjusted padding */
+            border-radius: 30px; /* More rounded */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+             min-width: 200px; /* Ensure minimum width */
+             text-align: center;
+        }
+
+        #notification.show {
+            display: block;
+            opacity: 1;
+        }
+        #video-promosi {
+    padding: 30px 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+
+#video-promosi video {
+    max-width: 1000px; 
+    width: 150%;
+    height: auto;
+    border-radius: 8px;
+    display: inline-block;
+}
+        /* Responsive Adjustments */
+        @media (max-width: 992px) { /* Added a breakpoint for larger tablets */
+            .produk-item {
+                width: calc(50% - 20px); /* Two items per row with gap */
+                 max-width: 350px; /* Prevent items from getting too wide */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar .container {
+                 flex-direction: column;
+                 align-items: flex-start; /* Align items to the start */
+                 gap: 10px;
+            }
+
+            .utility-nav {
+                 width: 100%; /* Utility nav takes full width */
+                 justify-content: space-between; /* Distribute items */
+                 gap: 10px;
+                 flex-wrap: wrap;
+            }
+
+            .search-container {
+                 flex-grow: 1; /* Allow search to take available space */
+                 order: 1; /* Put search first */
+            }
+
+            .cart-link, .user-link {
+                order: 2; /* Put cart and user after search */
+                 flex-shrink: 0; /* Prevent shrinking */
+            }
+
+            .main-header .container {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .main-header h1 a {
+                font-size: 2.2em;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                padding: 15px;
+            }
+
+             .hero-banner-section {
+                 padding: 60px 20px;
+             }
+
+             .hero-banner-section h2 {
+                 font-size: 2.5em;
+             }
+
+             .hero-banner-section p {
+                 font-size: 1.1em;
+             }
+
+
+            .produk h2 {
+                 font-size: 2em;
+            }
+
+            .produk-container {
+                gap: 20px; /* Smaller gap on smaller screens */
+            }
+
+            .produk-item {
+                width: calc(50% - 10px); /* Two items per row */
+                padding: 15px;
+                 max-width: none; /* Remove max-width constraint */
+            }
+
+             .product-info p {
+                 font-size: 0.9em;
+                 min-height: 35px;
+             }
+
+            .footer-grid {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .footer-column {
+                flex-basis: auto;
+                width: 80%; /* Make columns take most of the width */
+                 max-width: 400px; /* Limit width */
+            }
+
+            .footer-column h4 {
+                text-align: center;
+            }
+
+            .footer-column p i {
+                 margin-right: 5px;
+            }
+
+             .payment-methods {
+                 justify-content: center; /* Center payment icons */
+                 display: flex;
+             }
+
+             #chat-input {
+                 padding: 8px;
+             }
+
+              #live-chat .btn {
+                 padding: 8px 10px;
+                 font-size: 0.9em;
+              }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar .container {
+                 align-items: center; /* Center items again on very small screens */
+            }
+            .utility-nav {
+                flex-direction: column; /* Stack utility items */
+                align-items: center;
+                gap: 8px;
+            }
+            .search-container, .cart-link, .user-link {
+                width: 100%; /* Full width for utility items */
+                justify-content: center; /* Center content inside */
+                 order: unset; /* Reset order */
+            }
+
+             .search-container {
+                 padding: 8px 10px;
+             }
+             .search-container input {
+                 padding: 4px;
+             }
+
+
+            .hero-banner-section h2 {
+                font-size: 2em;
+            }
+
+            .hero-banner-section p {
+                font-size: 1em;
+            }
+
+            .main-header h1 a {
+                font-size: 1.8em;
+            }
+
+             .main-nav ul {
+                 padding: 10px;
+                 gap: 5px;
+             }
+
+             .main-nav .nav-link {
+                 padding: 6px 12px;
+                 font-size: 0.95em;
+             }
+
+            .produk h2 {
+                 font-size: 1.8em;
+            }
+
+            .produk-item {
+                width: 100%; /* One item per row */
+                padding: 15px;
+            }
+
+            .product-badge {
+                font-size: 0.7em; /* Smaller badge text on very small screens */
+                padding: 3px 6px;
+            }
+
+             .btn {
+                 padding: 8px 12px;
+                 font-size: 0.9em;
+             }
+
+             .btn i {
+                 font-size: 0.8em;
+             }
+
+            .features-section h3 {
+                 font-size: 1.6em;
+                 margin-bottom: 15px;
+            }
+             .features-section p {
+                 font-size: 1em;
+             }
+
+             #live-chat h2 {
+                 font-size: 1.6em;
+             }
+
+             .chat-input-area {
+                 flex-direction: column;
+                 gap: 8px;
+             }
+             #chat-input {
+                 width: 100%;
+                 margin-right: 0;
+                 padding: 8px;
+             }
+             #live-chat .btn {
+                 width: 100%;
+                 padding: 10px;
+             }
+
+
+            .footer-column {
+                width: 95%; /* Make columns take most of the width */
+            }
+
+             .footer-column h4 {
+                 font-size: 1.3em;
+             }
+
+             .footer-column a {
+                 font-size: 1em;
+             }
+             .footer-column p {
+                 font-size: 0.95em;
+             }
+
+             .footer-bottom {
+                 font-size: 0.85em;
+             }
+
+             .payment-methods img {
+                 height: 30px;
+             }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="container">
+            <span>Selamat Datang di Toko Mainan Anak Ceria!</span>
+            <nav class="utility-nav">
+                 <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Cari mainan...">
+                     <button id="search-button" aria-label="Cari"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="keranjang.html" class="cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                     Keranjang (<span id="cart-count">0</span>)
+                </a>
+                <a href="#" class="user-link">
+                    <i class="fas fa-user"></i>
+                    Akun
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <header class="main-header">
+         <div class="container">
+             <div class="logo">
+                 <h1><a href="index.html">Anak Ceria Toys</a></h1>
+             </div>
+             <nav class="main-nav">
+                 <ul>
+                     <li><a href="index.html" class="nav-link active">Beranda</a></li>
+                     <li><a href="produk.html" class="nav-link">Produk</a></li>
+                     <li><a href="tentang.html" class="nav-link">Tentang</a></li>
+                     <li><a href="kontak.html" class="nav-link">Kontak</a></li>
+                     <li><a href="form.html" class="nav-link">Form Pembelian</a></li>
+                 </ul>
+             </nav>
+         </div>
+    </header>
+
+    <main>
+        <!DOCTYPE html>
+        <html lang="id">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Video Promosi & Testimoni</title>
+          <style>
+            body {
+              margin: 0;
+              font-family: Arial, sans-serif;
+              background-color: #fdfdfd;
+            }
+        
+            .container {
+              max-width: 1000px;
+              margin: 40px auto;
+              padding: 0 20px;
+            }
+        
+            #video-promosi {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+        
+            .video-wrapper {
+              position: relative;
+              max-width: 800px;
+              width: 100%;
+              border-radius: 10px;
+              overflow: hidden;
+            }
+        
+            .video-wrapper video {
+              width: 100%;
+              display: block;
+            }
+        
+            .testimoni-box {
+              position: absolute;
+              bottom: 20px;
+              right: 20px;
+              width: 200px;
+              background-color: rgba(255, 255, 255, 0.6); /* transparan */
+              padding: 10px;
+              border-radius: 8px;
+              font-size: 0.8em;
+              box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+        
+            .testimoni-box h4 {
+              margin: 0 0 5px;
+              color: #ff9800;
+            }
+        
+            .testimoni-box p {
+              margin: 0 0 10px;
+              font-style: italic;
+            }
+        
+            .testimoni-form input,
+            .testimoni-form textarea {
+              width: 100%;
+              font-size: 0.8em;
+              margin-bottom: 6px;
+              padding: 6px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+            }
+        
+            .testimoni-form button {
+              width: 100%;
+              padding: 6px;
+              background-color: #ff9800;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              font-size: 0.8em;
+              cursor: pointer;
+            }
+        
+            .testimoni-form button:hover {
+              background-color: #e68900;
+            }
+          </style>
+        </head>
+        <body>
+        
+        <section id="video-promosi">
+          <div class="container">
+            <div class="video-wrapper">
+              <video autoplay loop controls>
+                <source src="videoo.mp4.mp4" type="video/mp4">
+                Browser Anda tidak mendukung video.
+              </video>
+        
+              <!-- Kotak Testimoni -->
+              <div class="testimoni-box" id="testimoni-box">
+                <h4>- Andi</h4>
+                <p>"Mainannya bagus sekali!"</p>
+        
+                <form class="testimoni-form" id="testimoni-form">
+                  <input type="text" id="nama" placeholder="Nama" required>
+                  <textarea id="pesan" rows="2" placeholder="Komentar" required></textarea>
+                  <button type="submit">Kirim</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <script>
+          document.getElementById("testimoni-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const nama = document.getElementById("nama").value.trim();
+            const pesan = document.getElementById("pesan").value.trim();
+        
+            if (nama && pesan) {
+              const testimoniBox = document.getElementById("testimoni-box");
+              testimoniBox.innerHTML = `<h4>- ${nama}</h4><p>"${pesan}"</p>` + testimoniBox.innerHTML.split('</form>')[1];
+              this.reset();
+            }
+          });
+        </script>
+        
+        </body>
+        </html>
+        <form class="testimoni-form" id="testimoni-form">
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+
+<section class="hero-banner-section">
+            <div class="container">
+                <h2>Mainan Edukatif & Menyenangkan!</h2>
+                <p>Temukan koleksi mainan terbaik untuk tumbuh kembang si kecil.</p>
+                <a href="produk.html" class="btn">Lihat Semua Mainan</a>
+            </div>
+        </section>
+
+        <section class="produk" id="product-list-section">
+            <div class="container">
+                <h2>Produk Unggulan</h2>
+                <div class="produk-container">
+                    <article class="produk-item" data-id="teddy001" data-name="Boneka Teddy Bear" data-category="boneka" data-price="350000">
+                        <div class="product-badges">
+                             <span class="product-badge category">Boneka</span>
+                        </div>
+                        <div class="product-image">
+                            <img src="https://media.istockphoto.com/id/455270629/id/foto/teddy-bear-terisolasi-pada-latar-belakang-putih.jpg?s=612x612&w=0&k=20&c=sHD4kNLwGEZbXAVQ72Db4s6hF2A0cKt0cezWHTj0fFE=" alt="Boneka Teddy Bear" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3>Boneka Teddy Bear</h3>
+                            <p>Boneka teddy bear super lembut dan nyaman untuk menemani tidur anak</p>
+                            <span class="harga">Rp 350.000</span>
+                            <div class="button-group">
+                                <button class="btn add-to-cart-btn"><i class="fas fa-cart-plus"></i> Beli</button>
+                                <a href="produk-detail.html?id=teddy001" class="btn detail-btn"><i class="fas fa-info-circle"></i> Detail</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="produk-item" data-id="robot001" data-name="Robot Transformer" data-category="robot" data-price="899000">
+                         <div class="product-badges">
+                             <span class="product-badge category">Robot</span>
+                         </div>
+                        <div class="product-image">
+                            <img src="https://img.lazcdn.com/g/p/3f31deaf96c3f16999b6ea4246f1844f.png" alt="Robot Transformer" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3>Robot Transformer</h3>
+                            <p>Robot yang bisa diubah menjadi kendaraan dan kembali lagi</p>
+                            <span class="harga">Rp 899.000</span>
+                            <div class="button-group">
+                                <button class="btn add-to-cart-btn"><i class="fas fa-cart-plus"></i> Beli</button>
+                                <a href="produk-detail.html?id=robot001" class="btn detail-btn"><i class="fas fa-info-circle"></i> Detail</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="produk-item" data-id="puzzle001" data-name="Puzzle Edukasi Hewan" data-category="puzzle" data-price="175000">
+                         <div class="product-badges">
+                             <span class="product-badge category">Puzzle</span>
+                         </div>
+                        <div class="product-image">
+                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//catalog-image/88/MTA-142065312/brd-44261_mainan-edukasi-wooden-puzzle-puzzle-kayu-jigsaw-mainan-puzzle-kayu-anak-ukuran-kecil_full01-bbf30f4c.jpg" alt="Puzzle Edukasi" loading="lazy">
+                        </div>
+                        <div class="product-info">
+                            <h3>Puzzle Edukasi Hewan</h3>
+                            <p>Puzzle kayu bergambar hewan dan tumbuhan untuk belajar sambil bermain</p>
+                            <span class="harga">Rp 175.000</span>
+                             <div class="button-group">
+                                 <button class="btn add-to-cart-btn"><i class="fas fa-cart-plus"></i> Beli</button>
+                                 <a href="produk-detail.html?id=puzzle001" class="btn detail-btn"><i class="fas fa-info-circle"></i> Detail</a>
+                             </div>
+                        </div>
+                    </article>
+
+                     <article class="produk-item" data-id="rc001" data-name="Mobil Remote Control" data-category="remote" data-price="450000">
+                          <div class="product-badges">
+                              <span class="product-badge category">Remote</span>
+                          </div>
+                         <div class="product-image">
+                              <img src="https://id-test-11.slatic.net/p/2366d2882c8de93390d7599e012e3dc1.jpg" alt="Mobil Remote Control" loading="lazy">
+                           </div>
+                          <div class="product-info">
+                               <h3>Mobil Remote Control</h3>
+                               <p>Mobil remote control dengan kecepatan tinggi dan baterai tahan lama</p>
+                               <span class="harga">Rp 450.000</span>
+                               <div class="button-group">
+                                 <button class="btn add-to-cart-btn"><i class="fas fa-cart-plus"></i> Beli</button>
+                                 <a href="produk-detail.html?id=rc001" class="btn detail-btn"><i class="fas fa-info-circle"></i> Detail</a>
+                                </div>
+                           </div>
+                     </article>
+
+                      <article class="produk-item" data-id="lego001" data-name="Lego City Police Station" data-category="konstruksi" data-price="850000">
+                           <div class="product-badges">
+                                <span class="product-badge hot">Hot</span>
+                                <span class="product-badge category">Konstruksi</span>
+                           </div>
+                          <div class="product-image">
+                               <img src="EGO City Police Station.jpeg" alt="Lego City Police Station" loading="lazy">
+                           </div>
+                           <div class="product-info">
+                                <h3>LEGO City Police Station</h3>
+                                <p>Set lego untuk membangun kota miniatur lengkap dengan figure</p>
+                                <span class="harga">Rp 850.000</span>
+                                <div class="button-group">
+                                    <button class="btn add-to-cart-btn"><i class="fas fa-cart-plus"></i> Beli</button>
+                                    <a href="produk-detail.html?id=lego001" class="btn detail-btn"><i class="fas fa-info-circle"></i> Detail</a>
+                                 </div>
+                            </div>
+                      </article>
+
+                     <article class="produk-item" data-id="kitchen001" data-name="Mainan Masak-Masakan" data-category="peran" data-price="275000">
+                           <div class="product-badges">
+                                <span class="product-badge new">Baru</span>
+                                <span class="product-badge category">Peran</span>
+                            </div>
+                           <div class="product-image">
+                                <img src="https://img.id.my-best.com/product_images/5b4011b9540933dd9dc9cf0dae4f4bd5.jpeg" alt="Mainan Masak-Masakan" loading="lazy">
+                           </div>
+                           <div class="product-info">
+                                <h3>Mainan Masak-Masakan</h3>
+                                <p>Set lengkap mainan masak-masakan dengan suara dan lampu</p>
+                                <span class="harga">Rp 275.000</span>
+                                <div class="button-group">
+                                     <button class="btn add-to-cart-btn"><i class="fas fa-cart-plus"></i> Beli</button>
+                                     <a href="produk-detail.html?id=kitchen001" class="btn detail-btn"><i class="fas fa-info-circle"></i> Detail</a>
+                                 </div>
+                           </div>
+                           <div id="notification"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartCountSpan = document.getElementById("cart-count");
+            const notificationDiv = document.getElementById("notification");
+            // Select buttons using the new class
+            const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+            const searchInput = document.getElementById("search-input");
+            const productItems = document.querySelectorAll(".produk-item");
+            const filterButtons = document.querySelectorAll('.category-filters button');
+            const currentYearSpan = document.getElementById("current-year");
+
+            // Set dynamic year in footer
+            currentYearSpan.textContent = new Date().getFullYear();
+
+            // --- Cart Functions (Copied from index.html - improved version) ---
+
+            function getCart() {
+                try {
+                    const cart = localStorage.getItem("keranjang");
+                    return cart ? JSON.parse(cart) : [];
+                } catch (e) {
+                    console.error("Error loading cart from localStorage:", e);
+                    return [];
+                }
+            }
+
+            function saveCart(cart) {
+                try {
+                    localStorage.setItem("keranjang", JSON.stringify(cart));
+                } catch (e) {
+                    console.error("Error saving cart to localStorage:", e);
+                }
+            }
+
+            function updateCartCount() {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountSpan.textContent = totalItems;
+            }
+
+            function showNotification(message) {
+                notificationDiv.textContent = message;
+                notificationDiv.classList.add("show");
+                setTimeout(() => {
+                    notificationDiv.classList.remove("show");
+                    setTimeout(() => { notificationDiv.textContent = ''; }, 500);
+                }, 2000);
+            }
+
+            // --- Filtering and Search Functionality (Combined) ---
+
+            function applyFilters() {
+                 const searchTerm = searchInput.value.toLowerCase();
+                 const activeCategoryButton = document.querySelector('.category-filters button.active');
+                 const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all'; // Default to 'all'
+
+                 productItems.forEach(item => {
+                     const productName = item.dataset.name ? item.dataset.name.toLowerCase() : '';
+                     const productDescription = item.querySelector('p') ? item.querySelector('p').textContent.toLowerCase() : '';
+                     const itemCategory = item.dataset.category ? item.dataset.category.toLowerCase() : '';
+
+                     const matchesSearch = searchTerm === '' || productName.includes(searchTerm) || productDescription.includes(searchTerm) || itemCategory.includes(searchTerm);
+                     const matchesCategory = selectedCategory === 'all' || selectedCategory === itemCategory;
+
+                     // Item is visible only if it matches both search and category filters
+                     if (matchesSearch && matchesCategory) {
+                         item.style.display = 'flex'; // Use 'flex' as per CSS layout
+                     } else {
+                         item.style.display = 'none';
+                     }
+                 });
+            }
+
+            // Event listener for search input
+            searchInput.addEventListener('input', applyFilters);
+
+            // Event listeners for category filter buttons
+            filterButtons.forEach(button => {
+              button.addEventListener('click', () => {
+                // Remove 'active' class from all filter buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add 'active' class to the clicked button
+                button.classList.add('active');
+                // Apply filters based on the new active category and current search term
+                applyFilters();
+              });
+            });
+
+
+            // --- Initial Setup and Event Listeners ---
+
+            // Initial cart count update when the page loads
+            updateCartCount();
+
+            // Initial filter application when the page loads (shows all products)
+            applyFilters();
+
+
+            // Add event listeners to all "Tambah ke Keranjang" buttons
+            addToCartButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const productItem = this.closest(".produk-item");
+
+                    // Extract product details using data attributes
+                    const productId = productItem.dataset.id || `product-${Date.now()}`; // Fallback ID
+                    const productName = productItem.dataset.name || productItem.querySelector("h3").textContent;
+                    // Ensure data-price exists or parse from .harga (parsing is less robust)
+                    const productPrice = parseFloat(productItem.dataset.price) || parseFloat(productItem.querySelector(".harga").textContent.replace('Rp ', '').replace(/\./g, '').replace(',', '.'));
+                    const productImage = productItem.querySelector("img") ? productItem.querySelector("img").src : '';
+
+
+                    const product = {
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImage,
+                        quantity: 1 // Start with quantity 1 when adding a new item
+                    };
+
+                    let cart = getCart(); // Get current cart state
+
+                    // Check if the product is already in the cart based on its unique ID
+                    const existingProductIndex = cart.findIndex(item => item.id === productId);
+
+                    if (existingProductIndex > -1) {
+                        // If the product exists, increment its quantity
+                        cart[existingProductIndex].quantity += 1;
+                        showNotification(`"${productName}" diperbarui (x${cart[existingProductIndex].quantity}) di keranjang!`);
+                    } else {
+                        // If the product is not in the cart, add it as a new item
+                        cart.push(product);
+                        showNotification(`✅ "${productName}" berhasil ditambahkan ke keranjang!`);
+                    }
+
+                    saveCart(cart); // Save the updated cart back to localStorage
+                    updateCartCount(); // Update the displayed cart count
+
+                    // Optional: Redirect to the cart page after adding a product
+                    // window.location.href = "keranjang.html";
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
+
+    <script>
+        // Data keranjang
+        const cart = [];
+
+        // Fungsi untuk format harga
+        function formatRupiah(number) {
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR"
+            }).format(number);
+        }
+
+        // Fungsi untuk update tampilan keranjang
+        function updateCartDisplay() {
+            const cartItems = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${item.name} - ${formatRupiah(item.price)}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            cartTotal.textContent = formatRupiah(total);
+        }
+
+        // Tambahkan event listener ke semua tombol "Beli"
+        const buyButtons = document.querySelectorAll(".add-to-cart-btn");
+        buyButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                const product = e.target.closest(".produk-item");
+                const name = product.dataset.name;
+                const price = parseInt(product.dataset.price);
+
+                cart.push({ name, price });
+                updateCartDisplay();
+                alert(`${name} ditambahkan ke keranjang!`);
+            });
+        });
+
+        // Tombol Checkout
+        document.getElementById("checkout-btn").addEventListener("click", () => {
+            if (cart.length === 0) {
+                alert("Keranjang masih kosong!");
+                return;
+            }
+
+            let summary = "Produk dalam keranjang:\n";
+            let total = 0;
+            cart.forEach(item => {
+                summary += `- ${item.name} : ${formatRupiah(item.price)}\n`;
+                total += item.price;
+            });
+            summary += `\nTotal belanja: ${formatRupiah(total)}`;
+
+            alert("Checkout Berhasil!\n\n" + summary);
+            cart.length = 0;
+            updateCartDisplay();
+        });
+    </script>
+</body>
+</html>
+
+                     </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <h3>Mengapa Memilih Anak Ceria Toys?</h3>
+                <p>Kami menyediakan mainan edukatif berkualitas tinggi yang aman dan dirancang untuk merangsang kreativitas serta perkembangan anak. Dengan koleksi yang beragam, layanan pelanggan yang ramah, dan harga terjangkau, kami adalah pilihan terbaik untuk kebutuhan mainan si kecil Anda.</p>
+            </div>
+        </section>
+
+         <section style="padding: 40px 0;">
+              <div class="container">
+                  <div id="live-chat">
+                      <h2>Live Chat</h2>
+                      <div id="chat-box">
+                          </div>
+                      <div class="chat-input-area">
+                          <input type="text" id="chat-input" placeholder="Ketik pesan...">
+                          <button id="send-btn" class="btn"><i class="fas fa-paper-plane"></i> Kirim</button>
+                      </div>
+                  </div>
+              </div>
+         </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h4>Tentang Kami</h4>
+                <p>Anak Ceria Toys adalah toko mainan yang berdedikasi untuk menyediakan mainan edukatif dan menyenangkan bagi anak-anak.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Tautan Cepat</h4>
+                <ul>
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="produk.html">Produk</a></li>
+                    <li><a href="tentang.html">Tentang</a></li>
+                    <li><a href="kontak.html">Kontak</a></li>
+                    <li><a href="form.html">Form Pembelian</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Hubungi Kami</h4>
+                <p><i class="fas fa-envelope"></i> Email: info@anakceriatoys.com</p>
+                <p><i class="fas fa-phone"></i> Telepon: (021) 123-4567</p>
+                 <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Bahagia No. 123, Kota Cerah</p>
+            </div>
+             <div class="footer-column">
+                 <h4>Metode Pembayaran</h4>
+                 <div class="payment-methods">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_202x_logo.png/800px-Mastercard_202x_logo.png" alt="Mastercard">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Visa_Inc._logo.svg/1280px-Visa_Inc._logo.svg.png" alt="Visa">
+                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo-id.png/800px-Logo_ovo-id.png" alt="OVO">
+                 </div>
+             </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; <span id="current-year"></span> Toko Mainan Anak Ceria. Semua Hak Dilindungi.
+        </div>
+    </footer>
+
+    <div id="notification"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartCountSpan = document.getElementById("cart-count");
+            const notificationDiv = document.getElementById("notification");
+            const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+            const searchInput = document.getElementById("search-input");
+            const productItems = document.querySelectorAll(".produk-item");
+            const chatBox = document.getElementById("chat-box");
+            const chatInput = document.getElementById("chat-input");
+            const sendBtn = document.getElementById("send-btn");
+             const currentYearSpan = document.getElementById("current-year");
+
+             // Set dynamic year in footer
+            currentYearSpan.textContent = new Date().getFullYear();
+
+
+            // --- Cart Functions ---
+
+            // Function to get cart data from localStorage
+            function getCart() {
+                try {
+                    const cart = localStorage.getItem("keranjang");
+                    return cart ? JSON.parse(cart) : [];
+                } catch (e) {
+                    console.error("Error loading cart from localStorage:", e);
+                    return [];
+                }
+            }
+
+            // Function to save cart data to localStorage
+            function saveCart(cart) {
+                try {
+                    localStorage.setItem("keranjang", JSON.stringify(cart));
+                } catch (e) {
+                    console.error("Error saving cart to localStorage:", e);
+                }
+            }
+
+            // Function to update the cart count displayed in the header
+            function updateCartCount() {
+                const cart = getCart();
+                // Calculate total quantity of items in the cart
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountSpan.textContent = totalItems;
+            }
+
+            // Function to show a transient notification message
+            function showNotification(message) {
+                notificationDiv.textContent = message;
+                notificationDiv.classList.add("show");
+                // Hide notification after 2 seconds (adjust as needed)
+                setTimeout(() => {
+                    notificationDiv.classList.remove("show");
+                    // Optional: Clear message after fading out transition
+                    setTimeout(() => { notificationDiv.textContent = ''; }, 500); // Match CSS transition duration
+                }, 2000); // Notification visible for 2 seconds
+            }
+
+            // --- Search Functionality ---
+            function filterProducts() {
+                const searchTerm = searchInput.value.toLowerCase();
+
+                productItems.forEach(item => {
+                    const productName = item.dataset.name.toLowerCase();
+                    const productDescription = item.querySelector('p').textContent.toLowerCase(); // Include description in search
+                    const productCategory = item.dataset.category.toLowerCase(); // Include category
+
+                    // Check if the search term is found in name, description, or category
+                    if (productName.includes(searchTerm) || productDescription.includes(searchTerm) || productCategory.includes(searchTerm)) {
+                        item.style.display = 'flex'; // Or 'block', depending on your layout. 'flex' works with the item's flex properties.
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                 // Optional: Add a message if no products are found
+                 // This would require checking if any items are still displayed and adding/removing a message div.
+            }
+
+            // Add event listener for search input
+            searchInput.addEventListener('input', filterProducts); // Filter as the user types
+
+            // Optional: Add event listener for search button click
+            // document.getElementById('search-button').addEventListener('click', filterProducts);
+
+
+            // --- Live Chat Script (Basic Placeholder) ---
+            // This is a basic demonstration. A real live chat requires server-side implementation.
+
+            // Function to add a message to the chat box UI
+            function addMessage(sender, message, type = 'received') {
+                const messageElement = document.createElement("p");
+                // Apply different styles based on message type (sent/received)
+                messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+                messageElement.classList.add('chat-messag', type); // Add classes for styling
+                chatBox.appendChild(messageElement);
+                // Scroll to the bottom to show the latest message
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            // Add a welcome message when the chat loads
+            addMessage("Admin", "Halo! Ada yang bisa kami bantu?", "received");
+
+            // Event listener for the Send button click
+            sendBtn.addEventListener("click", () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    addMessage("Anda", message, "sent"); // Display user's message
+                    chatInput.value = ""; // Clear the input field
+                    // In a real application, send 'message' to the server here
+                    // and handle the response from the admin/bot via addMessage('Admin', response, 'received')
+                    // For demo purposes, let's simulate an auto-response
+                     setTimeout(() => {
+                         addMessage("Admin", "Terima kasih atas pesan Anda. Mohon tunggu sebentar, admin kami akan segera membalas.", "received");
+                     }, 1000); // Simulate a slight delay for the admin response
+                }
+            });
+
+            // Event listener for the Enter key press in the input field
+            chatInput.addEventListener("keypress", (event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Prevent default form submission if in a form
+                    sendBtn.click(); // Trigger the send button click
+                }
+            });
+             // --- End Live Chat Script ---
+
+
+            // --- Initial Setup and Event Listeners ---
+
+            // Initial cart count update when the page loads
+            updateCartCount();
+
+            // Add event listeners to all "Tambah ke Keranjang" buttons
+            addToCartButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    // Find the parent product item element
+                    const productItem = this.closest(".produk-item");
+
+                    // Extract product details using data attributes (more robust)
+                    const productId = productItem.dataset.id;
+                    const productName = productItem.dataset.name;
+                    const productPrice = parseFloat(productItem.dataset.price); // Get price directly as a number
+                    const productImage = productItem.querySelector("img").src;
+
+
+                    const product = {
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImage,
+                        quantity: 1 // Start with quantity 1 when adding a new item
+                    };
+
+                    let cart = getCart(); // Get current cart state
+
+                    // Check if the product is already in the cart based on its unique ID
+                    const existingProductIndex = cart.findIndex(item => item.id === productId);
+
+                    if (existingProductIndex > -1) {
+                        // If the product exists, increment its quantity
+                        cart[existingProductIndex].quantity += 1;
+                        showNotification(`"${productName}" diperbarui (x${cart[existingProductIndex].quantity}) di keranjang!`);
+                    } else {
+                        // If the product is not in the cart, add it as a new item
+                        cart.push(product);
+                        showNotification('✅ "${productName}" berhasil ditambahkan ke keranjang!');
+                    }
+
+                    saveCart(cart); // Save the updated cart back to localStorage
+                    updateCartCount(); // Update the displayed cart count
+
+                    // Optional: Redirect to the cart page after adding a product
+                    // window.location.href = "keranjang.html";
+                })
+            });
+
+        });
+    </script>
+
+</body>
+</html>
